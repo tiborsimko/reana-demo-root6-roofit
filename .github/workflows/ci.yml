@@ -4,13 +4,13 @@
 # REANA is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-name: CI
+name: ci
 
 on:
   push:
   pull_request:
   schedule:
-    - cron: '0 7 * * 1'
+    - cron: "0 7 * * 1"
 
 jobs:
   lint-commitlint:
@@ -49,6 +49,24 @@ jobs:
         run: |
           sudo apt-get install shellcheck
           ./run-tests.sh --check-shellcheck
+
+  lint-yamllint:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Lint YAML files
+        run: |
+          pip install yamllint
+          ./run-tests.sh --check-yamllint
 
   cwl-validate:
     runs-on: ubuntu-24.04

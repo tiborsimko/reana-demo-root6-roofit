@@ -47,9 +47,14 @@ check_shellcheck () {
     find . -name "*.sh" -exec shellcheck {} \+
 }
 
+check_yamllint() {
+    yamllint .
+}
+
 check_all () {
     check_commitlint
     check_shellcheck
+    check_yamllint
 }
 
 if [ $# -eq 0 ]; then
@@ -61,5 +66,6 @@ arg="$1"
 case $arg in
     --check-commitlint) check_commitlint "$@";;
     --check-shellcheck) check_shellcheck;;
+    --check-yamllint) check_yamllint;;
     *) echo "[ERROR] Invalid argument '$arg'. Exiting." && exit 1;;
 esac
