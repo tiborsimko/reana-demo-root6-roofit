@@ -43,6 +43,10 @@ check_commitlint () {
     fi
 }
 
+check_markdownlint() {
+    markdownlint-cli2 "**/*.md"
+}
+
 check_shellcheck () {
     find . -name "*.sh" -exec shellcheck {} \+
 }
@@ -53,6 +57,7 @@ check_yamllint() {
 
 check_all () {
     check_commitlint
+    check_markdownlint
     check_shellcheck
     check_yamllint
 }
@@ -65,6 +70,7 @@ fi
 arg="$1"
 case $arg in
     --check-commitlint) check_commitlint "$@";;
+    --check-markdownlint) check_markdownlint;;
     --check-shellcheck) check_shellcheck;;
     --check-yamllint) check_yamllint;;
     *) echo "[ERROR] Invalid argument '$arg'. Exiting." && exit 1;;

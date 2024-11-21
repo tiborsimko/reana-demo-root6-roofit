@@ -39,6 +39,20 @@ jobs:
         run: |
           ./run-tests.sh --check-commitlint ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} ${{ github.event.pull_request.number }}
 
+  lint-markdownlint:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+
+      - name: Lint Markdown files
+        run: |
+          npm install markdownlint-cli2 --global
+          ./run-tests.sh --check-markdownlint
+
   lint-shellcheck:
     runs-on: ubuntu-24.04
     steps:
