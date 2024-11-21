@@ -13,6 +13,20 @@ on:
     - cron: "0 7 * * 1"
 
 jobs:
+  format-prettier:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+
+      - name: Check Prettier code fomatting
+        run: |
+          npm install prettier --global
+          ./run-tests.sh --check-prettier
+
   lint-commitlint:
     runs-on: ubuntu-24.04
     steps:

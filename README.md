@@ -7,30 +7,31 @@
 
 ## About
 
-This [REANA](http://www.reana.io/) reproducible analysis example emulates a typical
-particle physics analysis where the signal and background data is processed and fitted
-against a model. The example will use the [RooFit](https://root.cern.ch/roofit) package
-of the [ROOT](https://root.cern.ch/) framework.
+This [REANA](http://www.reana.io/) reproducible analysis example emulates a
+typical particle physics analysis where the signal and background data is
+processed and fitted against a model. The example will use the
+[RooFit](https://root.cern.ch/roofit) package of the
+[ROOT](https://root.cern.ch/) framework.
 
 ## Analysis structure
 
 Making a research data analysis reproducible basically means to provide
-"runnable recipes" addressing (1) where is the input data, (2) what software
-was used to analyse the data, (3) which computing environments were used to run
-the software and (4) which computational workflow steps were taken to run the
+"runnable recipes" addressing (1) where is the input data, (2) what software was
+used to analyse the data, (3) which computing environments were used to run the
+software and (4) which computational workflow steps were taken to run the
 analysis. This will permit to instantiate the analysis on the computational
 cloud and run the analysis to obtain (5) output results.
 
 ### 1. Input data
 
-In this example, the signal and background data will be generated; see below. Therefore
-there is no explicit input file to be taken care of.
+In this example, the signal and background data will be generated; see below.
+Therefore there is no explicit input file to be taken care of.
 
 ### 2. Analysis code
 
 The analysis will consist of two stages. In the first stage, signal and
-background are generated. In the second stage, a fit will be made for the
-signal and background.
+background are generated. In the second stage, a fit will be made for the signal
+and background.
 
 For the first generation stage, [gendata.C](code/gendata.C) is a ROOT macro that
 generates signal and background data.
@@ -45,23 +46,23 @@ and was slightly modified.
 ### 3. Compute environment
 
 In order to be able to rerun the analysis even several years in the future, we
-need to "encapsulate the current compute environment", for example to freeze
-the ROOT version our analysis is using. We shall achieve this by preparing a
+need to "encapsulate the current compute environment", for example to freeze the
+ROOT version our analysis is using. We shall achieve this by preparing a
 [Docker](https://www.docker.com/) container image for our analysis steps.
 
-This analysis example is runs within the [ROOT6](https://root.cern.ch/)
-analysis framework. The computing environment can be therefore easily
-encapsulated by using the upstream
+This analysis example is runs within the [ROOT6](https://root.cern.ch/) analysis
+framework. The computing environment can be therefore easily encapsulated by
+using the upstream
 [reana-env-root6](https://github.com/reanahub/reana-env-root6) base image. (See
 there how it was created.)
 
 We shall use the ROOT version 6.18.04. Note that we can actually use this
 container image "as is", because our two macros `gendata.C` and `fitdata.C` can
 be "uploaded" and "mounted" into the running container at runtime. There is no
-need to compile any of the analysis source code beforehand. We can therefore
-use the ROOT 6.18.04 base image directly, without building a new container
-image specially dedicated to our analysis. The ROOT 6.18.04 base image fully
-specifies the complete analysis environment that we need for our analysis.
+need to compile any of the analysis source code beforehand. We can therefore use
+the ROOT 6.18.04 base image directly, without building a new container image
+specially dedicated to our analysis. The ROOT 6.18.04 base image fully specifies
+the complete analysis environment that we need for our analysis.
 
 ### 4. Analysis workflow
 
@@ -100,8 +101,8 @@ $ ls -l plot.png
 ```
 
 Note that you can also use [CWL](http://www.commonwl.org/v1.0/),
-[Yadage](https://github.com/diana-hep/yadage) or [Snakemake](https://snakemake.github.io)
-workflow specifications:
+[Yadage](https://github.com/diana-hep/yadage) or
+[Snakemake](https://snakemake.github.io) workflow specifications:
 
 - [workflow definition using CWL](workflow/cwl/workflow.cwl)
 - [workflow definition using Yadage](workflow/yadage/workflow.yaml)
@@ -165,14 +166,15 @@ outputs:
     - results/plot.png
 ```
 
-In this example we are using a simple Serial workflow engine to represent our sequential
-computational workflow steps. Note that we can also use the CWL workflow specification
-(see [reana-cwl.yaml](reana-cwl.yaml)), the Yadage workflow specification (see
-[reana-yadage.yaml](reana-yadage.yaml)) or the Snakemake workflow specification (see
+In this example we are using a simple Serial workflow engine to represent our
+sequential computational workflow steps. Note that we can also use the CWL
+workflow specification (see [reana-cwl.yaml](reana-cwl.yaml)), the Yadage
+workflow specification (see [reana-yadage.yaml](reana-yadage.yaml)) or the
+Snakemake workflow specification (see
 [reana-snakemake.yaml](reana-snakemake.yaml)).
 
-We can now install the REANA command-line client, run the analysis and download the
-resulting plots:
+We can now install the REANA command-line client, run the analysis and download
+the resulting plots:
 
 ```console
 $ # create new virtual environment
