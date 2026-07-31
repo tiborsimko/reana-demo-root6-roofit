@@ -36,6 +36,7 @@ stages:
           resources:
             - compute_backend: htcondorcern
             - htcondor_max_runtime: espresso
+            - htcondor_requirements: '(TARGET.Arch =?= "X86_64")'
   - name: fitdata
     dependencies: [gendata]
     scheduler:
@@ -59,3 +60,4 @@ stages:
           resources:
             - compute_backend: htcondorcern
             - htcondor_max_runtime: espresso
+            - htcondor_requirements: '(TARGET.Arch =?= "X86_64")'

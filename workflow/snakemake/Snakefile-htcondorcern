@@ -14,7 +14,8 @@ rule gendata:
         "docker://docker.io/reanahub/reana-env-root6:6.18.04"
     resources:
         compute_backend="htcondorcern",
-        htcondor_max_runtime="espresso"
+        htcondor_max_runtime="espresso",
+        htcondor_requirements='(TARGET.Arch =?= "X86_64")'
     shell:
         "mkdir -p results && root -b -q '{input.gendata_tool}({params.events},\"{output}\")'"
 
@@ -28,6 +29,7 @@ rule fitdata:
         "docker://docker.io/reanahub/reana-env-root6:6.18.04"
     resources:
         compute_backend="htcondorcern",
-        htcondor_max_runtime="espresso"
+        htcondor_max_runtime="espresso",
+        htcondor_requirements='(TARGET.Arch =?= "X86_64")'
     shell:
         "root -b -q '{input.fitdata_tool}(\"{input.data}\",\"{output}\")'"

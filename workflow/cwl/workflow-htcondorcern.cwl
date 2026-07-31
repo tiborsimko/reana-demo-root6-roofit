@@ -31,6 +31,7 @@ steps:
       reana:
         compute_backend: htcondorcern
         htcondor_max_runtime: espresso
+        htcondor_requirements: '(TARGET.Arch =?= "X86_64")'
     run: gendata.cwl
     in:
       gendata_tool: gendata_tool
@@ -41,6 +42,7 @@ steps:
       reana:
         compute_backend: htcondorcern
         htcondor_max_runtime: espresso
+        htcondor_requirements: '(TARGET.Arch =?= "X86_64")'
     run: fitdata.cwl
     in:
       fitdata: fitdata_tool

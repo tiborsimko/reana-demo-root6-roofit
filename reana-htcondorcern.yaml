@@ -15,12 +15,14 @@ workflow:
         environment: "docker.io/reanahub/reana-env-root6:6.18.04"
         compute_backend: htcondorcern
         htcondor_max_runtime: espresso
+        htcondor_requirements: '(TARGET.Arch =?= "X86_64")'
         commands:
           - mkdir -p results && root -b -q 'code/gendata.C(${events},"${data}")'
       - name: fitdata
         environment: "docker.io/reanahub/reana-env-root6:6.18.04"
         compute_backend: htcondorcern
         htcondor_max_runtime: espresso
+        htcondor_requirements: '(TARGET.Arch =?= "X86_64")'
         commands:
           - root -b -q 'code/fitdata.C("${data}","${plot}")'
 outputs:
