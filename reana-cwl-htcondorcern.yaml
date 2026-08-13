@@ -10,6 +10,9 @@ inputs:
 workflow:
   type: cwl
   file: workflow/cwl/workflow-htcondorcern.cwl
+  files:
+    - workflow/cwl/gendata.cwl
+    - workflow/cwl/fitdata.cwl
 outputs:
   files:
     - outputs/plot.png
